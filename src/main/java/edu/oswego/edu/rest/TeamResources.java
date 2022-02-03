@@ -25,9 +25,6 @@ public class TeamResources {
         teamName.forEach(name -> sb.append(teamName));
         String responseMessage = sb.toString();
         return Response.status(Response.Status.CREATED).entity(responseMessage).build();
-
-
-
     }
 
 

@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
-@Path("/TeamName")
+@Path("/teamname")
 
 public class TeamResources {
     ArrayList<String> teamName = new ArrayList<>();

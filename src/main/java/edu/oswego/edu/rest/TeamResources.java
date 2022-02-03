@@ -21,6 +21,7 @@ public class TeamResources {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTeamNames(){
+        teamName.add("goodbye");
         StringBuilder sb = new StringBuilder();
         teamName.forEach(name -> sb.append(teamName));
         String responseMessage = sb.toString();

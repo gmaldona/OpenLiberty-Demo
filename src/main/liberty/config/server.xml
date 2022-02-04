@@ -21,4 +21,11 @@
 
     <!-- Default SSL configuration enables trust for default certificates from the Java runtime -->
     <ssl id="defaultSSLConfig" trustDefaultCerts="true" />
+
+    <!-- For Cors -->
+    <cors domain="/"
+          allowedOrigins="*"
+          allowedMethods="GET, POST, DELETE, PUT"
+          allowCredentials="true"
+          exposeHeaders="MyHeader"/>
 </server>

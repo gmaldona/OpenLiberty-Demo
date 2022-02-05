@@ -15,7 +15,6 @@ import javax.ws.rs.core.Response;
 import edu.oswego.edu.rest.datastore.TeamNameDatastore;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
-import java.util.ArrayList;
 
 @Path("/teamname")
 

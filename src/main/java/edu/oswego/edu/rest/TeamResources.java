@@ -26,7 +26,6 @@ public class TeamResources {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTeamNames(){
-        teamName.add("goodbye");
         StringBuilder sb = new StringBuilder();
         teamName.forEach(name -> sb.append(teamName));
         String responseMessage = sb.toString();
@@ -35,21 +34,17 @@ public class TeamResources {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response addTeamName(@RequestBody JsonObject teamNameBody) {
         String nameA = teamNameBody.getString("nameA");
         String nameB = teamNameBody.getString("nameB");
         String yearA = teamNameBody.getString("yearA");
         String yearB = teamNameBody.getString("yearB");
 
-        String res = nameA + yearA + nameB + yearB;
-        teamName.add(res);
+        String response = nameA + yearA + nameB + yearB;
+        teamName.add(response);
 
-        StringBuilder sb = new StringBuilder();
-        teamName.forEach(name -> sb.append(teamName));
-        String responseMessage = sb.toString();
-
-        return Response.status(Response.Status.CREATED).entity(responseMessage).build();
-
+        return Response.status(Response.Status.OK).build();
     }
 
 }

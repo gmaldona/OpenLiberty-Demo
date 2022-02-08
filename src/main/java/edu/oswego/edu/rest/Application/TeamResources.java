@@ -1,4 +1,4 @@
-package edu.oswego.edu.rest;
+package edu.oswego.edu.rest.Application;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -16,7 +16,7 @@ import edu.oswego.edu.rest.datastore.TeamNameDatastore;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 
-@Path("/teamname")
+@Path("/teamnames")
 
 public class TeamResources {
     private static final Jsonb jsonb = JsonbBuilder.create();

@@ -1,4 +1,4 @@
-package edu.oswego.edu.rest;
+package edu.oswego.edu.rest.CORSFilter;
 
 
 import java.io.IOException;

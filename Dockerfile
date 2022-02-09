@@ -1,16 +1,8 @@
-FROM icr.io/appcafe/open-liberty:kernel-slim-java11-openj9-ubi
+FROM icr.io/appcafe/open-liberty:full-java11-openj9-ubi
+ARG VERSION=1.0
+ARG REVISION=SNAPSHOT
 
-COPY --chown=1001:0 /src/main/liberty/config /config
-
-RUN features.sh
-
-COPY --chown=1001:0 target/*.war /config/apps
-
+COPY --chown=1001:0 src/main/liberty/config/ /config/
+COPY --chown=1001:0 target/*.war /config/apps/
 RUN configure.sh
-RUN apt-get update
-RUN apt-get install -y maven
-RUN mvn package
-ENV PORT = 13128
-EXPOSE 13128
-
-CMD ["mvn", "liberty:run"]
+USER 1001

@@ -1,6 +1,3 @@
-package edu.oswego.edu.rest.CORSFilter;
-
-
 import java.io.IOException;
 
 import javax.ws.rs.container.ContainerRequestContext;

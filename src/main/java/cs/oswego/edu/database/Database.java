@@ -1,4 +1,4 @@
-package edu.oswego.edu.rest.mongo;
+package cs.oswego.edu.database;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
@@ -15,9 +15,9 @@ import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 
 @ApplicationScoped
-public class MongoProducer {
+public class Database {
 
-     // Inject from config.props
+    // Inject from config.props
     @Inject
     @ConfigProperty(name = "mongo.hostname", defaultValue = "localhost")
     String hostname; // db host name
@@ -36,36 +36,36 @@ public class MongoProducer {
 
     @Inject
     @ConfigProperty(name = "mongo.pass.encoded")
-    String encodedPass; // db passcode 
+    String encodedPass; // db passcode
 
     @Produces
     public MongoClient createMongo() { // returns an instance of MongoClient
-		String password = PasswordUtil.passwordDecode(encodedPass);
+        String password = PasswordUtil.passwordDecode(encodedPass);
 
         MongoCredential creds = MongoCredential.createCredential(
-            user, 
-            dbName, 
-            password.toCharArray()
+                user,
+                dbName,
+                password.toCharArray()
         );
 
         // new mongo instance
         return new MongoClient(
-            new ServerAddress(hostname, port), 
-            creds, 
-            new MongoClientOptions
-                .Builder().
-                build()
+                new ServerAddress(hostname, port),
+                creds,
+                new MongoClientOptions
+                        .Builder().
+                        build()
         );
     }
 
     @Produces
-    public MongoDatabase createDB(MongoClient client) { 
+    public MongoDatabase createDB(MongoClient client) {
         return client.getDatabase(dbName); // get Database
     }
 
     // clean up function
-    public void close(@Disposes MongoClient toClose) { 
-        toClose.close(); // close connection to the MongoDatabase instance 
+    public void close(@Disposes MongoClient toClose) {
+        toClose.close(); // close connection to the MongoDatabase instance
     }
 
 }

@@ -35,7 +35,7 @@ public class TeamResources {
     // @desc:    Creates new teamName and write it to the DB
     // @access   public
     @POST
-    @Path("/addTeamName")
+    @Path("/addneamname")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addTeamNameToDB(@RequestBody JsonObject body) {
 
@@ -55,7 +55,7 @@ public class TeamResources {
     // @desc:    Get team names
     // @access   public
     @GET
-    @Path("/addTeamName")
+    @Path("/addteamname")
     public String retrieve() {
         StringWriter sb = new StringWriter();
         try {

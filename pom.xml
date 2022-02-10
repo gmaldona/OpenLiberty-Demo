@@ -17,6 +17,45 @@
         <liberty.var.default.https.port>9443</liberty.var.default.https.port> <!-- https -->
     </properties>
 
+    <profiles>
+        <profile>
+            <id>runnable-package</id>
+            <properties>
+                <packaging.type>runnable</packaging.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>minify-runnable-package</id>
+            <properties>
+                <packaging.type>minify,runnable</packaging.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>docker-image</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>dockerfile-maven-plugin</artifactId>
+                        <version>${version.dockerfile-maven-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>build-docker-image</id>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <repository>openliberty-${project.artifactId}</repository>
+                            <tag>${project.version}</tag>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <dependencies>
 
         <dependency>

@@ -33,18 +33,23 @@ public class TeamResources {
     
     // @route:   Post /teamnames/addTeamName
     // @desc:    Creates new teamName and write it to the DB
-    // @access   public
+    // // @access   public
     @POST
-    @Path("/addneamname")
+    @Path("/addteamname")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addTeamNameToDB(@RequestBody JsonObject body) {
+    public Response addTeamNameToDB(@RequestBody JsonObject teamNameBody) {
+
+        String nameA = teamNameBody.getString("nameA");
+        String nameB = teamNameBody.getString("nameB");
+        String yearA = teamNameBody.getString("yearA");
+        String yearB = teamNameBody.getString("yearB");
+
+        String teamName = nameA + yearA + nameB + yearB;
 
         MongoCollection<Document> teamNames = db.getCollection("TeamNames"); // MongoCollection instance, like a table in sql
         Document newTeamName = new Document();
-		newTeamName.put("NameA",body.getString("nameA"));
-		newTeamName.put("NameB",body.getString("nameB"));
-		newTeamName.put("YearA",body.getString("yearA"));
-		newTeamName.put("YearB",body.getString("yearB"));
+		newTeamName.put("Team Name",teamName);
+
 		teamNames.insertOne(newTeamName); // populate the record to the instance
 
         return Response.status(Response.Status.OK).build();
@@ -59,16 +64,16 @@ public class TeamResources {
     public String retrieve() {
         StringWriter sb = new StringWriter();
         try {
-            // Document is like a placeholder, represent a map
+        //     // Document is like a placeholder, represent a map
 			MongoCollection<Document> teamNames = db.getCollection("TeamNames"); // get collection instance
-			
+        
             sb.append("[");
 
 			boolean first = true;
-			for (Document d : teamNames.find()) {
+			for (Document d : teamNames.find()) { // Document d = JSONObject
 				if (!first) sb.append(",");
 				else first = false;
-				sb.append(d.toJson()); // JSON object
+				sb.append(" " + d.getString("Team Name"));
 			}
 			sb.append("]");
 		} catch (Exception e) {

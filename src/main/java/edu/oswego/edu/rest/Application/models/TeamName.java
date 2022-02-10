@@ -10,9 +10,6 @@ public class TeamName {
     // @Id 
     // private int id;  // primary key
 
-    private String nameA;
-    private String nameB;
-    private String yearA;
-    private String yearB;
+    private String teamName;
 
 }

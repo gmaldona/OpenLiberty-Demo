@@ -1,3 +1,5 @@
+package cs.oswego.edu.corsfilter;
+
 import java.io.IOException;
 
 import javax.ws.rs.container.ContainerRequestContext;

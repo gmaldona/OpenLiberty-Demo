@@ -1,3 +1,4 @@
+package cs.oswego.edu.model;
 // import javax.persistence.Id;
 
 import lombok.Data;

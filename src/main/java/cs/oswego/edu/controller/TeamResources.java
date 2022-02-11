@@ -1,6 +1,7 @@
 package cs.oswego.edu.controller;
 
 import java.io.StringWriter;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.json.JsonObject;
@@ -17,10 +18,8 @@ import javax.ws.rs.core.Response;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import cs.oswego.edu.controller.TeamNameDatastore;
-
+import cs.oswego.edu.model.TeamName;
 import org.bson.Document;
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 
 @Path("/teamnames")
@@ -37,18 +36,11 @@ public class TeamResources {
     @POST
     @Path("/addteamname")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addTeamNameToDB(@RequestBody JsonObject teamNameBody) {
-
-        String nameA = teamNameBody.getString("nameA");
-        String nameB = teamNameBody.getString("nameB");
-        String yearA = teamNameBody.getString("yearA");
-        String yearB = teamNameBody.getString("yearB");
-
-        String teamName = nameA + yearA + nameB + yearB;
+    public Response addTeamNameToDB(TeamName teamName) {
 
         MongoCollection<Document> teamNames = db.getCollection("TeamNames"); // MongoCollection instance, like a table in sql
         Document newTeamName = new Document();
-		newTeamName.put("Team Name",teamName);
+		newTeamName.put("Team Name", teamName.getTeamName());
 
 		teamNames.insertOne(newTeamName); // populate the record to the instance
 
@@ -60,13 +52,14 @@ public class TeamResources {
     // @desc:    Get team names
     // @access   public
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/addteamname")
     public String retrieve() {
         StringWriter sb = new StringWriter();
         try {
         //     // Document is like a placeholder, represent a map
 			MongoCollection<Document> teamNames = db.getCollection("TeamNames"); // get collection instance
-        
+
             sb.append("[");
 
 			boolean first = true;
@@ -81,39 +74,4 @@ public class TeamResources {
 		}
 		return sb.toString();
     }
-
-
-
-
-    // @route:   GET /teamnames
-    // @desc:    Get team names
-    // @access   public
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getTeamNames() {
-        String responseMessage = jsonb.toJson(TeamNameDatastore.teamName.toArray());
-        return Response.status(Response.Status.CREATED).entity(responseMessage).build();
-    }
-
-    // @route:   Post teamnames
-    // @desc:    Creates new teamName
-    // @access   public
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response addTeamName(@RequestBody JsonObject teamNameBody) {
-        String nameA = teamNameBody.getString("nameA");
-        String nameB = teamNameBody.getString("nameB");
-        String yearA = teamNameBody.getString("yearA");
-        String yearB = teamNameBody.getString("yearB");
-
-        String response = nameA + yearA + nameB + yearB;
-        TeamNameDatastore.teamName.add(response);
-
-        //return Response.status(Response.Status.CREATED).entity(TeamNameDatastore.teamName.size()).build();
-        return Response.status(Response.Status.OK).build();
-    }
-
-
-
 }

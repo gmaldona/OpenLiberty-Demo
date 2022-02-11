@@ -1,4 +1,4 @@
-package edu.oswego.edu.rest.Application;
+package cs.oswego.edu.controller;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

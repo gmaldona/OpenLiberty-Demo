@@ -1,4 +1,4 @@
-package edu.oswego.edu.rest.Application.resources;
+package cs.oswego.edu.controller;
 
 import java.io.StringWriter;
 
@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import edu.oswego.edu.rest.datastore.TeamNameDatastore;
+import cs.oswego.edu.controller.TeamNameDatastore;
 
 import org.bson.Document;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;

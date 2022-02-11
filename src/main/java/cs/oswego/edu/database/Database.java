@@ -1,71 +1,56 @@
 package cs.oswego.edu.database;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import com.ibm.websphere.crypto.PasswordUtil;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Disposes;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 
 @ApplicationScoped
 public class Database {
 
-    // Inject from config.props
     @Inject
-    @ConfigProperty(name = "mongo.hostname", defaultValue = "localhost")
-    String hostname; // db host name
+    @ConfigProperty(name = "mongo.hostname", defaultValue = "127.0.0.1")
+    String hostname;
 
     @Inject
     @ConfigProperty(name = "mongo.port", defaultValue = "27017")
-    int port; // db port
+    int port;
 
     @Inject
-    @ConfigProperty(name = "mongo.dbname", defaultValue = "testdb")
-    String dbName; // db Name
+    @ConfigProperty(name = "mongo.database")
+    String database;
 
     @Inject
-    @ConfigProperty(name = "mongo.user")
-    String user; // db user
+    @ConfigProperty(name = "mongo.user", defaultValue = "root")
+    String user;
 
     @Inject
-    @ConfigProperty(name = "mongo.pass.encoded")
-    String encodedPass; // db passcode
+    @ConfigProperty(name = "mongo.password")
+    String password;
 
     @Produces
-    public MongoClient createMongo() { // returns an instance of MongoClient
-        String password = PasswordUtil.passwordDecode(encodedPass);
-
-        MongoCredential creds = MongoCredential.createCredential(
-                user,
-                dbName,
-                password.toCharArray()
-        );
-
-        // new mongo instance
+    public MongoClient createMongoClient() {
+        MongoCredential credentials = MongoCredential.createCredential(user, database, password.toCharArray());
         return new MongoClient(
                 new ServerAddress(hostname, port),
-                creds,
-                new MongoClientOptions
-                        .Builder().
-                        build()
+                credentials,
+                new MongoClientOptions.Builder().build()
         );
     }
 
     @Produces
-    public MongoDatabase createDB(MongoClient client) {
-        return client.getDatabase(dbName); // get Database
+    public MongoDatabase getDB(MongoClient client) {
+        return client.getDatabase(database);
     }
 
-    // clean up function
     public void close(@Disposes MongoClient toClose) {
-        toClose.close(); // close connection to the MongoDatabase instance
+        toClose.close();
     }
-
 }

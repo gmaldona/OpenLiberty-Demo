@@ -40,7 +40,7 @@ public class TeamResources {
 
         MongoCollection<Document> teamNames = db.getCollection("TeamNames"); // MongoCollection instance, like a table in sql
         Document newTeamName = new Document();
-		newTeamName.put("Team Name", teamName.getTeamName());
+		newTeamName.put("Team Name", teamName.generateTeamName());
 
 		teamNames.insertOne(newTeamName); // populate the record to the instance
 

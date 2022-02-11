@@ -24,9 +24,13 @@ public class TeamName {
         this.nameB = nameB;
         this.yearA = yearA;
         this.yearB = yearB;
-        this.teamName = nameA + nameB + yearA + yearB;
     }
 
     public TeamName()  {}
+
+    public String generateTeamName() {
+        this.teamName = nameA + yearA + nameB + yearB;
+        return teamName;
+    }
 
 }

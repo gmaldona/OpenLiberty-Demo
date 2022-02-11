@@ -1,4 +1,4 @@
-package dev.microprofile.starter;
+package cs.oswego.edu.controller;
 
 import java.io.IOException;
 

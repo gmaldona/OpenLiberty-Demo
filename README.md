@@ -4,7 +4,7 @@
 
 This web application is built on the production environment using Docker images. The guide will contain 2 sections, aimed more heavily toward the Docker deployment on Linux environment.
 
-## Running the project
+## Running the Project
 
 This guide will assume that [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) is already installed on your machine.
 
@@ -24,7 +24,7 @@ This guide will assume that [Docker](https://docs.docker.com/engine/install/) an
 
 **Step 6:** Create the Docker image and start the containers by running `docker-compose -f "docker-compose.yml" up -d --build` in the same directory.
 
-## Local development environment
+## Local Development Environment
 
 For local development environment, a Docker setup is not necessary. This guide assumes you already have [Maven](https://maven.apache.org/guides/getting-started/windows-prerequisites.html) 3.8.4 or higher and [JDK 17](https://openjdk.java.net/projects/jdk/17/) or higher installed. For Windows users:
 
@@ -44,7 +44,7 @@ Contributors are more than welcomed to improve the project by creating a new iss
 2. If you’ve fixed a bug or added something new, add a comprehensive list of changes.
 3. Ensure that your code is tested, functional, and is linted.
 
-## Built on
+## Built On
 
 This project is built on:
 

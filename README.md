@@ -31,7 +31,7 @@ For local development environment, a Docker setup is not necessary. This guide a
 ### for Windows users:
 
 
-**Step 1:** Install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition) as a Windows service. Optionally, install [MongoDB Compass](https://www.mongodb.com/products/compass) and [mongosh](https://docs.mongodb.com/mongodb-shell/) for your own convenience.
+**Step 1:** Install [MongoDB for Windows](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition) --- [MongoDB for Mac](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/). Optionally, install [MongoDB Compass](https://www.mongodb.com/products/compass) and [mongosh](https://docs.mongodb.com/mongodb-shell/) for your own convenience.
 
 **Step 2:** Using the MongoDB shell (either using MongoDB's shell or the built-in one in MongoDB Compass), create authentication for the database using the command in `mongo-init.js` but with the database name, username, and password of your choice.
 
@@ -40,34 +40,6 @@ For local development environment, a Docker setup is not necessary. This guide a
 **Step 4:** Run `mvn liberty:dev` to start the project in developer mode. The web app should be running on http://127.0.0.1:9080 
 
 
-### for Mac users
-
-**Step 1:** Install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/). 
-
-**Step 2:** run ```brew services start mongodb-community@5.0``` to enable mongodb, then ```mongosh``` to get into the mongodb bash. 
-
-**Step 3:** Now, create authentication for the database using the info in `mongo-init.js` and `microprofile-config.properties` in `src/main/webapp/META-INF`, but with the database name, username, and password of your choice. The two files should match.
-
-**Step 4:** Let's say you config your mongo properties like the picture bellow,
-
-<img width=400 alt="mongo" src = "https://user-images.githubusercontent.com/66233296/154155978-e75e5475-09e9-484d-8353-aa8de8642c5a.png">
-
-
-Then in mongosh, run
-
-- ```use teamnamedb``` --> this specifies the database we want to use
-
-- ```db.createUser({user: 'ccpr22s', pwd:'ccpr22s', roles: [{ role: 'readWrite', db:'teamnamedb'}]})``` --> create authenticated user
-
-- Now, you can `show users` to make sure that you have something like this bellow
-<img width="400" alt="mongo" src="https://user-images.githubusercontent.com/66233296/154155854-958aac51-4758-419f-b2d7-8ae3de9a3093.png">
-
-
-
-
-
-
-**Step 4:** Run `mvn liberty:dev` to start the project in developer mode. The web app should be running on http://127.0.0.1:9080 
 
 ## Contributing
 

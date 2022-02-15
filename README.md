@@ -1,42 +1,92 @@
-# Demo App (OpenLiberty + mongoDB)
+# Calibrated Peer Review Demo
 
-## Instructions on how to run
+## Getting Started
 
-After clone the repo, run docker to get mongodb image and process
+This web application is built on the production environment using Docker images. The guide will contain 2 sections, aimed more heavily toward the Docker deployment on Linux environment.
 
-```
-docker pull mongo
-docker run --name mongo-sample -p 127.0.0.1:27017:27017 -d mongo
-```
+## Running the Project
 
-After that, get into docker bash to create new user and database
+This guide will assume that [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) is already installed on your machine.
 
-```
-docker exec -it mongo-sample bash
-```
+**Step 1:** Pull the following Docker images:
+- Maven: `docker pull maven`
+- Open Liberty: `docker pull icr.io/appcafe/open-liberty:full-java11-openj9-ubi`
+- MongoDB: `docker pull mongo`
+- Nginx: `docker pull nginx`
 
-```
-mongo
-use testdb
-db.createUser({user: 'sampleUser', pwd:'openliberty', roles: [{ role: 'readWrite', db:'testdb'}]})
-```
+**Step 2:** Clone the repository.
 
-Then just exit twice to get out
+**Step 3:** Navigate to `src/main/webapp/META-INF` directory and update the config variables in `microprofile-config.properties`. At the same time, make sure your database name, username, and password match the one in the `mongo-init.js` at the root directory.
 
-### Running the project
+**Step 4:** At the root of the directory, create a `.env` file using `.env.example` as the template to fill out the variables.
 
-#### Backend
+**Step 5:** Update the server name and localhost port value in the `nginx.conf` file to set up a reverse proxy and make sure the listening port matches the one that is mapped from in `docker-compose.yml` (`8080` by default). If you do not wish to use a reverse proxy, simply ignore this file and remove the `nginx` service in your `docker-compose.yml`.
 
-First time run: 
-```
-mvn clean package liberty:dev
-```
-After the first time, just do: 
-```
-mvn liberty:dev 
-```
+**Step 6:** Create the Docker image and start the containers by running `docker-compose -f "docker-compose.yml" up -d --build` in the same directory.
 
-The server will now listen to port 9085. 
-http://localhost:9085/teamnames/addteamname
+## Local Development Environment
+
+For local development environment, a Docker setup is not necessary. This guide assumes you already have [Maven](https://maven.apache.org/guides/getting-started/windows-prerequisites.html) 3.8.4 or higher and [JDK 17](https://openjdk.java.net/projects/jdk/17/) or higher installed. 
+
+### for Windows users:
+
+
+**Step 1:** Install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition) as a Windows service. Optionally, install [MongoDB Compass](https://www.mongodb.com/products/compass) and [mongosh](https://docs.mongodb.com/mongodb-shell/) for your own convenience.
+
+**Step 2:** Using the MongoDB shell (either using MongoDB's shell or the built-in one in MongoDB Compass), create authentication for the database using the command in `mongo-init.js` but with the database name, username, and password of your choice.
+
+**Step 3:** Navigate to `src/main/webapp/META-INF` directory and update the config variables in `microprofile-config.properties` to match the values that you set up in step 2.
+
+**Step 4:** Run `mvn liberty:dev` to start the project in developer mode. The web app should be running on http://127.0.0.1:9080 
+
+
+### for Mac users
+
+**Step 1:** Install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/). 
+
+**Step 2:** run ```brew services start mongodb-community@5.0``` to enable mongodb, then ```mongosh``` to get into the mongodb bash. 
+
+**Step 3:** Now, create authentication for the database using the info in `mongo-init.js` and `microprofile-config.properties` in `src/main/webapp/META-INF`, but with the database name, username, and password of your choice. The two files should match.
+
+**Step 4:** Let's say you config your mongo properties like the picture bellow,
+
+<img width=400 alt="mongo" src = "https://user-images.githubusercontent.com/66233296/154155978-e75e5475-09e9-484d-8353-aa8de8642c5a.png">
+
+
+Then in mongosh, run
+
+- ```use teamnamedb``` --> this specifies the database we want to use
+
+- ```db.createUser({user: 'ccpr22s', pwd:'ccpr22s', roles: [{ role: 'readWrite', db:'teamnamedb'}]})``` --> create authenticated user
+
+- Now, you can `show users` to make sure that you have something like this bellow
+<img width="400" alt="mongo" src="https://user-images.githubusercontent.com/66233296/154155854-958aac51-4758-419f-b2d7-8ae3de9a3093.png">
+
+
+
+
+
+
+**Step 4:** Run `mvn liberty:dev` to start the project in developer mode. The web app should be running on http://127.0.0.1:9080 
+
+## Contributing
+
+Contributors are more than welcomed to improve the project by creating a new issue to report bugs, suggest new features, or make changes to the source code by making a pull request. To have your work merged in, please make sure the following is done:
+
+1. Fork the repository and create your branch from master.
+2. If you’ve fixed a bug or added something new, add a comprehensive list of changes.
+3. Ensure that your code is tested, functional, and is linted.
+
+## Built On
+
+This project is built on:
+
+- [Docker](https://www.docker.com/)
+- [Java](https://openjdk.java.net/)
+- [Maven](https://maven.apache.org/)
+- [MongoDB](https://www.mongodb.com/)
+- [Nginx](https://www.nginx.com/)
+- [Open Liberty](https://openliberty.io/)
+- [ReactJS](https://reactjs.org/)
 
 

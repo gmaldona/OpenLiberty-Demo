@@ -28,7 +28,7 @@ This guide will assume that [Docker](https://docs.docker.com/engine/install/) an
 
 For the local development environment, a Docker setup is not necessary. This guide assumes you already have [Maven](https://maven.apache.org/guides/getting-started/windows-prerequisites.html) 3.8.4 or higher and [JDK 17](https://openjdk.java.net/projects/jdk/17/) or higher installed. For Windows users:
 
-**Step 1:** Install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition) as a Windows service. Optionally, install [MongoDB Compass](https://www.mongodb.com/products/compass) and [mongosh](https://docs.mongodb.com/mongodb-shell/) for your own convenience.
+**Step 1:** Install [MongoDB for Windows](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition) or [MongoDB for Mac](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/). Optionally, install [MongoDB Compass](https://www.mongodb.com/products/compass) and [mongosh](https://docs.mongodb.com/mongodb-shell/) for your own convenience.
 
 **Step 2:** Using the MongoDB shell (either using MongoDB shell from terminal or the built-in one in MongoDB Compass), create authentication for the database using the command in `mongo-init.js` but with the database name, username, and password of your choice.
 

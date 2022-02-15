@@ -6,7 +6,7 @@ This web application is built on the production environment using Docker images.
 
 ## Running the Project
 
-This guide will assume that [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) is already installed on your machine.
+This guide will assume that [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) are already installed on your machine.
 
 **Step 1:** Pull the following Docker images:
 - Maven: `docker pull maven`
@@ -16,7 +16,7 @@ This guide will assume that [Docker](https://docs.docker.com/engine/install/) an
 
 **Step 2:** Clone the repository.
 
-**Step 3:** Navigate to `src/main/webapp/META-INF` directory and update the config variables in `microprofile-config.properties`. At the same time, make sure your database name, username, and password match the one in the `mongo-init.js` at the root directory.
+**Step 3:** Navigate to `src/main/webapp/META-INF` directory and update the config variables in `microprofile-config.properties`. At the same time, make sure your database name, username, and password match the one in the `mongo-init.js` in the root directory.
 
 **Step 4:** At the root of the directory, create a `.env` file using `.env.example` as the template to fill out the variables.
 
@@ -26,52 +26,19 @@ This guide will assume that [Docker](https://docs.docker.com/engine/install/) an
 
 ## Local Development Environment
 
-For local development environment, a Docker setup is not necessary. This guide assumes you already have [Maven](https://maven.apache.org/guides/getting-started/windows-prerequisites.html) 3.8.4 or higher and [JDK 17](https://openjdk.java.net/projects/jdk/17/) or higher installed. 
-
-### for Windows users:
-
+For the local development environment, a Docker setup is not necessary. This guide assumes you already have [Maven](https://maven.apache.org/guides/getting-started/windows-prerequisites.html) 3.8.4 or higher and [JDK 17](https://openjdk.java.net/projects/jdk/17/) or higher installed. For Windows users:
 
 **Step 1:** Install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition) as a Windows service. Optionally, install [MongoDB Compass](https://www.mongodb.com/products/compass) and [mongosh](https://docs.mongodb.com/mongodb-shell/) for your own convenience.
 
-**Step 2:** Using the MongoDB shell (either using MongoDB's shell or the built-in one in MongoDB Compass), create authentication for the database using the command in `mongo-init.js` but with the database name, username, and password of your choice.
+**Step 2:** Using the MongoDB shell (either using MongoDB shell from terminal or the built-in one in MongoDB Compass), create authentication for the database using the command in `mongo-init.js` but with the database name, username, and password of your choice.
 
-**Step 3:** Navigate to `src/main/webapp/META-INF` directory and update the config variables in `microprofile-config.properties` to match the values that you set up in step 2.
-
-**Step 4:** Run `mvn liberty:dev` to start the project in developer mode. The web app should be running on http://127.0.0.1:9080 
-
-
-### for Mac users
-
-**Step 1:** Install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/). 
-
-**Step 2:** run ```brew services start mongodb-community@5.0``` to enable mongodb, then ```mongosh``` to get into the mongodb bash. 
-
-**Step 3:** Now, create authentication for the database using the info in `mongo-init.js` and `microprofile-config.properties` in `src/main/webapp/META-INF`, but with the database name, username, and password of your choice. The two files should match.
-
-**Step 4:** Let's say you config your mongo properties like the picture bellow,
-
-<img width=400 alt="mongo" src = "https://user-images.githubusercontent.com/66233296/154155978-e75e5475-09e9-484d-8353-aa8de8642c5a.png">
-
-
-Then in mongosh, run
-
-- ```use teamnamedb``` --> this specifies the database we want to use
-
-- ```db.createUser({user: 'ccpr22s', pwd:'ccpr22s', roles: [{ role: 'readWrite', db:'teamnamedb'}]})``` --> create authenticated user
-
-- Now, you can `show users` to make sure that you have something like this bellow
-<img width="400" alt="mongo" src="https://user-images.githubusercontent.com/66233296/154155854-958aac51-4758-419f-b2d7-8ae3de9a3093.png">
-
-
-
-
-
+**Step 3:** Navigate to `src/main/webapp/META-INF` directory and update the config variables in `microprofile-config.properties` to match the values that you set up in step 2. Use the command `use <your database name>` to select a database.
 
 **Step 4:** Run `mvn liberty:dev` to start the project in developer mode. The web app should be running on http://127.0.0.1:9080 
 
 ## Contributing
 
-Contributors are more than welcomed to improve the project by creating a new issue to report bugs, suggest new features, or make changes to the source code by making a pull request. To have your work merged in, please make sure the following is done:
+Contributors are more than welcome to improve the project by creating a new issue to report bugs, suggest new features, or make changes to the source code by making a pull request. To have your work merged in, please make sure the following is done:
 
 1. Fork the repository and create your branch from master.
 2. If you’ve fixed a bug or added something new, add a comprehensive list of changes.

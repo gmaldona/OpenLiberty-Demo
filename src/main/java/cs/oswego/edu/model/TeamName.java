@@ -1,13 +1,17 @@
 package cs.oswego.edu.model;
 // import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 @Data // getters, setters, toString, Equals, HashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class TeamName {
 
     // @Id 
@@ -19,14 +23,6 @@ public class TeamName {
     public String yearA;
     public String yearB;
 
-    public TeamName(String nameA, String nameB, String yearA, String yearB) {
-        this.nameA = nameA;
-        this.nameB = nameB;
-        this.yearA = yearA;
-        this.yearB = yearB;
-    }
-
-    public TeamName()  {}
 
     public String generateTeamName() {
         this.teamName = nameA + yearA + nameB + yearB;

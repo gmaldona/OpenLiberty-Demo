@@ -7,8 +7,6 @@ import org.bson.Document;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.inject.Inject;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -18,7 +16,6 @@ import java.io.StringWriter;
 @Path("/teamnames")
 
 public class TeamResources {
-    private static final Jsonb jsonb = JsonbBuilder.create();
 
     @Inject
     MongoDatabase database;

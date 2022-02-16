@@ -5,6 +5,8 @@
         <feature>jaxrs-2.1</feature>
         <feature>cdi-2.0</feature>
         <feature>mpConfig-2.0</feature>
+        <feature>socialLogin-1.0</feature>
+        <feature>appSecurity-2.0</feature>
     </featureManager>
 
     <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
@@ -24,6 +26,17 @@
             httpsPort="${default.https.port}"
             id="defaultHttpEndpoint"
     />
+    <!-- Google Oauth -->
+    <googleLogin clientId="google_client_id" clientSecret="google_client_secret" /> <!-- change this later -->
+
+    <!-- protected apps need to have a security constraint defined -->
+    <application type="war" id="YOURID" name="YOURFILENAME" location="YOUFILE.war">
+        <application-bnd>
+            <security-role name="YOURROLE">
+                <special-subject type="ALL_AUTHENTICATED_USERS" />
+            </security-role>
+        </application-bnd>
+    </application>
 
     <webApplication contextRoot="/" location="openliberty-demo.war"/>
     

@@ -8,21 +8,15 @@ This web application is built on the production environment using Docker images.
 
 This guide will assume that [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) are already installed on your machine.
 
-**Step 1:** Pull the following Docker images:
-- Maven: `docker pull maven`
-- Open Liberty: `docker pull icr.io/appcafe/open-liberty:full-java11-openj9-ubi`
-- MongoDB: `docker pull mongo`
-- Nginx: `docker pull nginx`
+**Step 1:** Clone the repository.
 
-**Step 2:** Clone the repository.
+**Step 2:** Navigate to `src/main/webapp/META-INF` directory and update the config variables in `microprofile-config.properties`. At the same time, make sure your database name, username, and password match the one in the `mongo-init.js` in the root directory.
 
-**Step 3:** Navigate to `src/main/webapp/META-INF` directory and update the config variables in `microprofile-config.properties`. At the same time, make sure your database name, username, and password match the one in the `mongo-init.js` in the root directory.
+**Step 3:** At the root of the directory, create a `.env` file using `.env.example` as the template to fill out the variables.
 
-**Step 4:** At the root of the directory, create a `.env` file using `.env.example` as the template to fill out the variables.
+**Step 4:** Update the server name and localhost port value in the `nginx.conf` file to set up a reverse proxy and make sure the listening port matches the one that is mapped from in `docker-compose.yml` (`8080` by default). If you do not wish to use a reverse proxy, simply ignore this file and remove the `nginx` service in your `docker-compose.yml`.
 
-**Step 5:** Update the server name and localhost port value in the `nginx.conf` file to set up a reverse proxy and make sure the listening port matches the one that is mapped from in `docker-compose.yml` (`8080` by default). If you do not wish to use a reverse proxy, simply ignore this file and remove the `nginx` service in your `docker-compose.yml`.
-
-**Step 6:** Create the Docker image and start the containers by running `docker-compose -f "docker-compose.yml" up -d --build` in the same directory.
+**Step 5:** Create the Docker image and start the containers by running `docker-compose -f "docker-compose.yml" up -d --build` in the same directory.
 
 ## Local Development Environment
 

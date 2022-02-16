@@ -6,13 +6,13 @@ services:
     # Build from remote GitHub branch.
     # image: ghcr.io/xxxxxx/yyyyyy/zzzzzz:latest
     restart: unless-stopped
-    container_name: csc480
+    container_name: cpr-backend
     ports:
-      - "8080:9080"
+      - "80:9080"
   mongodb:
     image: mongo:latest
     restart: unless-stopped
-    container_name: mongo
+    container_name: cpr-mongo
     volumes:
       - ${DATABASE_FOLDER}:/db
       - ${INITIALIZE_SCRIPT}:/docker-entrypoint-initdb.d/mongo-init.js:ro
@@ -23,6 +23,6 @@ services:
   nginx:
     image: nginx:latest
     restart: unless-stopped
-    container_name: nginx
+    container_name: cpr-nginx
     volumes:
       - ${NGINX}:/etc/nginx/conf.d/default.conf

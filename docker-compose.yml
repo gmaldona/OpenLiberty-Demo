@@ -10,7 +10,7 @@ services:
     ports:
       - "80:9080"
   mongodb:
-    image: mongo:latest
+    image: mongo:5.0.6
     restart: unless-stopped
     container_name: cpr-mongo
     volumes:
@@ -21,7 +21,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
   nginx:
-    image: nginx:latest
+    image: nginx:1.21.6
     restart: unless-stopped
     container_name: cpr-nginx
     volumes:
